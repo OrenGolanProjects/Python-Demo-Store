@@ -1,0 +1,120 @@
+/* background color = #A6D1E6; icons color = #0078AA; white = #fff; grey = #8f8f8f; #114F78; #46C2CB;  #f2f0e6; ;*/
+body {
+  font-family: 'Montserrat';
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+/* ==============================================================================  */
+/* ================================== Headings ==================================  */
+/* ==============================================================================  */
+.big-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  line-height: 1.5;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-top: 60px;
+}
+
+
+/* ==============================================================================  */
+/* ================================== Login ==================================  */
+/* ==============================================================================  */
+
+.Login {
+  /* center the features in the page */
+  position: relative;
+  padding-top: 1rem;
+  text-align: left;
+  padding: 2% 10% ;
+
+}
+.margin-top-section{
+  margin-top: 10px;
+}
+.user_pass{
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+
+/* =============================================================================  */
+/* ================================== Sections =================================  */
+/* =============================================================================  */
+.colored-section-title {
+  background-color: #D4ECDD;
+  color: #fff;
+}
+.colored-section {
+  background-color: #345B63;
+  color: #fff;
+}
+
+.white-section {
+  background-color: #fff;
+  color: #8f8f8f;
+}
+/* =================================== Report ==================================  */
+.report_table {
+  margin-top: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+}
+
+.table_haeder{
+  margin-top: 1.5rem;
+}
+
+/* =============================================================================  */
+
+/* General */
+
+.white-page-lane {
+  padding: 10px 10px;
+}
+
+
+#navbarTogglerDemo02{
+  font-size: 1.5rem;
+}
+
+.sub-heading {
+  margin-top: 2%;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding-right: 206px;
+  padding-top: 15px;
+
+}
+.login{
+  
+  padding-top: 50px;
+  padding-bottom: 35px;
+  padding-left: 330px;
+  padding-right: 530px;
+
+
+}
+
+.invalid_login{
+  padding-left:  400px;
+  padding-right: 400px;
+  /* border-bottom: 100px; */
+}
+.form_border{
+  border-color:  #345B63;
+  border-style: dashed solid;
+  margin-bottom: 0px;
+  padding-bottom: 50px;
+
+}
