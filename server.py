@@ -10,7 +10,11 @@ obj_product = product()
 obj_cart = cart()
 obj_db_sqlit3 = database_sqlite3()
 obj_db_sqlit3.create_connection_sqlite3()
-bool_sqlite3 = True
+bool_sqlite3 = False
+# ===============================================
+# Manual login
+# username: "Matt Murdock"  pass:	"ErY7Fe8G"	role: admin
+# username: "Steven Grant" pass:	"NGFx8DzC"	role: customer
 # ===============================================
 
 
@@ -26,8 +30,6 @@ def validate_customer():
     if request.method == "POST":
         obj_customer.UserName = request.form["username"]
         obj_customer.Password = request.form["password"]
-        # obj_customer.UserName = "Steven Grant"
-        # obj_customer.Password = "NGFx8DzC"
         if bool_sqlite3:
             obj_customer.getCustomer(
                 obj_db_sqlit3.databaseconnection, bool_sqlite3)
@@ -73,7 +75,7 @@ def customer_choice():
                         obj_db_sqlit3.databaseconnection, bool_sqlite3)
                 else:
                     obj_cart.AddProductToCustomerTranscation(
-                        obj_db.databaseConnection)
+                        obj_db.databaseConnection, bool_sqlite3)
 
                 if obj_cart.isInsertSucceeded == False:
                     return render_template("invalid_login.html",
@@ -95,7 +97,7 @@ def customer_choice():
             obj_product.GetAppProducts(
                 obj_db_sqlit3.databaseconnection, bool_sqlite3)
         else:
-            obj_product.GetAppProducts(obj_db.databaseConnection)
+            obj_product.GetAppProducts(obj_db.databaseConnection, bool_sqlite3)
         return render_template("/store.html", title="SHOP", products=obj_product.products, role=str(obj_customer.Role))
 
 

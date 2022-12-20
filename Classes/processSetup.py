@@ -150,9 +150,11 @@ class cart:
                 db_connection.commit()
             else:
                 cur = db_connection.cursor(prepared=True)
-                sql = """INSERT INTO shope.producttocustomer(`idCustomer`, `IdProduct`, `Quantity`) values( % s, % s, % s); """
+                # sql = """INSERT INTO shope.producttocustomer(`IdCustomer`, `IdProduct`, `Quantity`) values( % s, % s, % s); """
+                print(self.IdCustomer, self.IdProduct, self.Quantity)
                 cur.execute(
-                    sql, (self.idCustomer, self.idProduct, self.Quantity))
+                    "INSERT INTO producttocustomer (IdCustomer, IdProduct, Quantity) VALUES (%s, %s, %s)", (self.IdCustomer, self.IdProduct, self.Quantity))
+
                 db_connection.commit()
 
         except mc.Error as e:
