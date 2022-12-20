@@ -10,7 +10,7 @@ obj_product = product()
 obj_cart = cart()
 obj_db_sqlit3 = database_sqlite3()
 obj_db_sqlit3.create_connection_sqlite3()
-bool_sqlite3 = False
+bool_sqlite3 = True
 # ===============================================
 # Manual login
 # username: "Matt Murdock"  pass:	"ErY7Fe8G"	role: admin
@@ -20,7 +20,7 @@ bool_sqlite3 = False
 
 @app.route('/')
 def home():
-    return render_template("login.html", title="HOME")
+    return render_template("login.html", title="HOME", action="login", loginPage_title="Welcome Back! Please enter your details.", loginPage_header="Login To Your Account")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -30,16 +30,34 @@ def validate_customer():
     if request.method == "POST":
         obj_customer.UserName = request.form["username"]
         obj_customer.Password = request.form["password"]
+        if obj_customer.isSignUP:
+            if "customer" in request.form:
+                obj_customer.Role = "customer"
+            else:
+                obj_customer.Role = "admin"
+            obj_db_sqlit3.tableName = "customers"
+            obj_db_sqlit3.UserName = obj_customer.UserName
+            obj_db_sqlit3.Password = obj_customer.Password
+            obj_db_sqlit3.Role = obj_customer.Role
+            obj_db_sqlit3.insert()
+            obj_customer.__init__()
+            return render_template("login.html", title="HOME", action="login", loginPage_title="Welcome Back! Please enter your details.", loginPage_header="Login To Your Account")
         if bool_sqlite3:
             obj_customer.getCustomer(
                 obj_db_sqlit3.databaseconnection, bool_sqlite3)
         else:
             obj_customer.getCustomer(obj_db.databaseConnection, bool_sqlite3)
-
     if obj_customer.isCustomerExists:
         return redirect("/store")
     else:
-        return redirect("/loginError")
+        if 'Sign-up' == request.form["commit"]:
+            obj_customer.UserName = ""
+            obj_customer.Password = ""
+            obj_customer.isSignUP = True
+            return redirect("/sign-up")
+
+        else:
+            return redirect("/loginError")
 
 
 @ app.route("/loginError", methods=["GET", "POST"])
@@ -127,6 +145,11 @@ def close():
                                title="Byebye",
                                thankyou_header="Bye Bye.",
                                thankyou_description="Until next time...")
+
+
+@ app.route("/sign-up", methods=["GET", "POST"])
+def sign_up():
+    return render_template("login.html", title="sign-up", action="/sign_up", loginPage_title="You made the right decision!", loginPage_header="Please Enter Username & Password, welcome to the family!")
 
 
 if __name__ == "__main__":

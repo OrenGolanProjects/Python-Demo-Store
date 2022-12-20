@@ -29,6 +29,7 @@ class customer:
         self.Id = None
         self.isCustomerExists = False
         self.customers = None
+        self.isSignUP = False
 
     def getCustomer(self, db_connection, bool_sqlite3):
         res = None

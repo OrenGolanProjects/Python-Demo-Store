@@ -57,7 +57,7 @@
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-6">
-              <h1 class="big-heading">Welcome Back! Please enter your details. </h1>
+              <h1 class="big-heading">{{loginPage_title}} </h1>
           </div>
 
           <div class="col-md-4 rounded float-left">
@@ -74,8 +74,8 @@
     <section class= "colored-section-title margin-top-section ">
       <div class="container login">
         <div class="sign-form">
-          <h3 style="color: #152D35;">Login To Your Account</h3>
-        <hr />
+          <h3 style="color: #152D35;">{{ loginPage_header}}</h3>
+        
         <!-- ==== ===  ===== -->
         <!-- ==== Form ===== -->
         <form id="new_user" method="post" action="/login">
@@ -105,14 +105,57 @@
           </div>
           <br>
           <div>
+            {% if action == 'login' %} 
+              <input 
+                type="submit" 
+                name="commit" 
+                value="Login" 
+                class="btn btn-outline-light btn btn-secondary btn-lg" 
+                >
+                <input 
+                type="submit" 
+                name="commit" 
+                value="Sign-up" 
+                class="btn btn-outline-light btn btn-secondary btn-lg" 
+                >
 
+            {% endif %}
+
+            {% if action == '/sign_up' %} 
+              
+                <input 
+                type="submit" 
+                name="confirm_sign_in" 
+                value="SUBMIT" 
+                class="btn btn-outline-light btn btn-secondary btn-lg" 
+                method="POST"
+                >
+                <input 
+                type="submit" 
+                name="EXIT" 
+                value="CANCEL" 
+                class="btn btn-outline-light btn btn-secondary btn-lg" 
+
+                >
+                <div>
+                  <div class="form-check conteiner font_color user_pass margin-top-section" >
+                    <input class="form-check-input" type="checkbox" value=""  name="customer" id="flexCheckIndeterminate">
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                      Customer
+                    </label>
+                  </div>
+                  <div class="form-check conteiner font_color user_pass">
+                    <input class="form-check-input" type="checkbox" value=""  name="admin" id="flexCheckIndeterminate">
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                      <label >Admin</label>
+
+                    </label>
+                  </div>
+                </div>
+
+            {% endif %}
+            
           </div>
-          <input 
-            type="submit" 
-            name="commit" 
-            value="Submit" 
-            class="btn btn-outline-light btn btn-secondary btn-lg" 
-            >
           <hr />
         </form>
 
