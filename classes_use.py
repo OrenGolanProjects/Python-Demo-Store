@@ -4,10 +4,18 @@ from Classes.processSetup import *
 obj_db_sqlit3 = database_sqlite3()
 obj_db_sqlit3.create_connection_sqlite3()
 
-# con = obj_db_sqlit3.databaseconnection.cursor()
-# con.execute('SELECT name from sqlite_master where type= "table"')
-# print(con.fetchall())
-# con.close()
+con = obj_db_sqlit3.databaseconnection.cursor()
+con.execute('SELECT * from customers ')
+res = con.fetchall()
+print(res)
+con.close()
+
+
+for i in range(27, 42):
+    con = obj_db_sqlit3.databaseconnection.cursor()
+    con.execute(
+        f"DELETE FROM customers WHERE idcustomer = {i};    ")
+    con.close()
 
 
 # obj_db = database_mysql()
@@ -42,11 +50,11 @@ obj_db_sqlit3.create_connection_sqlite3()
 #     obj_db_sqlit3.IdCustomer = product[1]
 #     obj_db_sqlit3.IdProduct = product[2]
 #     obj_db_sqlit3.Quantity = product[3]
-obj_db_sqlit3.tableName = "customers"
-obj_db_sqlit3.UserName = "admin"
-obj_db_sqlit3.Password = 123
-obj_db_sqlit3.Role = "admin"
-obj_db_sqlit3.insert()
+# obj_db_sqlit3.tableName = "customers"
+# obj_db_sqlit3.UserName = "admin"
+# obj_db_sqlit3.Password = 123
+# obj_db_sqlit3.Role = "admin"
+# obj_db_sqlit3.insert()
 
 # con.close()
 

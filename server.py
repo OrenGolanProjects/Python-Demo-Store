@@ -3,6 +3,7 @@ from Classes.processSetup import *
 
 # =========== Init all objects ==================
 app = Flask(__name__)
+
 obj_db = database_mysql()
 obj_db.create_connection_MYSQL()
 obj_customer = customer()
@@ -10,7 +11,8 @@ obj_product = product()
 obj_cart = cart()
 obj_db_sqlit3 = database_sqlite3()
 obj_db_sqlit3.create_connection_sqlite3()
-bool_sqlite3 = True
+
+bool_sqlite3 = False
 # ===============================================
 # Manual login
 # username: "Matt Murdock"  pass:	"ErY7Fe8G"	role: admin
