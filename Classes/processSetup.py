@@ -9,6 +9,7 @@ class database_mysql:
         self.password = 'Og305275@'
         self.schema = 'shope'
         self.databaseConnection = None
+        self.isInsertSucceeded = False
 
     def create_connection_MYSQL(self):
         try:
@@ -18,7 +19,24 @@ class database_mysql:
                 self.databaseConnection = conn
 
         except mc.error as e:
-            print("DB Connect failed, error is: " + e)
+            print(e)
+            raise Exception("Failed to create DB connection")
+
+    def insert(self):
+        try:
+            cur = self.databaseConnection.cursor(prepared=True)
+            print(self.UserName, self.Password, self.Role)
+            cur.execute(
+                "INSERT INTO customers (UserName, Password,Role) VALUES (%s, %s, %s)", (self.UserName, self.Password, self.Role))
+            self.databaseConnection.commit()
+        except mc.Error as e:
+            print(e)
+            raise Exception(
+                "Execute insert AddProductToCustomerTranscation Failed!")
+        else:
+            self.isInsertSucceeded = True
+        finally:
+            cur.close()
 
 
 class customer:

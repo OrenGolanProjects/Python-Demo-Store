@@ -22,7 +22,12 @@ bool_sqlite3 = False
 
 @app.route('/')
 def home():
-    return render_template("login.html", title="HOME", action="login", loginPage_title="Welcome Back! Please enter your details.", loginPage_header="Login To Your Account")
+    obj_customer.isSignUP = False
+    return render_template("login.html",
+                           title="HOME",
+                           action="login",
+                           loginPage_title="Welcome Back! Please enter your details.",
+                           loginPage_header="Login To Your Account")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -32,16 +37,29 @@ def validate_customer():
     if request.method == "POST":
         obj_customer.UserName = request.form["username"]
         obj_customer.Password = request.form["password"]
+
         if obj_customer.isSignUP:
+            if not (str(obj_customer.UserName).replace(' ', '')):
+                raise Exception("UserName is null or empty.")
+            if not (str(obj_customer.Password).replace(' ', '')):
+                raise Exception("Password is null or empty.")
             if "customer" in request.form:
                 obj_customer.Role = "customer"
             else:
                 obj_customer.Role = "admin"
-            obj_db_sqlit3.tableName = "customers"
-            obj_db_sqlit3.UserName = obj_customer.UserName
-            obj_db_sqlit3.Password = obj_customer.Password
-            obj_db_sqlit3.Role = obj_customer.Role
-            obj_db_sqlit3.insert()
+
+            if bool_sqlite3:
+                obj_db_sqlit3.tableName = "customers"
+                obj_db_sqlit3.UserName = obj_customer.UserName
+                obj_db_sqlit3.Password = obj_customer.Password
+                obj_db_sqlit3.Role = obj_customer.Role
+                obj_db_sqlit3.insert()
+            else:
+                obj_db.tableName = "customers"
+                obj_db.UserName = obj_customer.UserName
+                obj_db.Password = obj_customer.Password
+                obj_db.Role = obj_customer.Role
+                obj_db.insert()
             obj_customer.__init__()
             return render_template("login.html", title="HOME", action="login", loginPage_title="Welcome Back! Please enter your details.", loginPage_header="Login To Your Account")
         if bool_sqlite3:
