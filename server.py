@@ -13,11 +13,6 @@ obj_db_sqlit3 = database_sqlite3()
 obj_db_sqlit3.create_connection_sqlite3()
 
 bool_sqlite3 = False
-# ===============================================
-# Manual login
-# username: "Matt Murdock"  pass:	"ErY7Fe8G"	role: admin
-# username: "Steven Grant" pass:	"NGFx8DzC"	role: customer
-# ===============================================
 
 
 @app.route('/')
