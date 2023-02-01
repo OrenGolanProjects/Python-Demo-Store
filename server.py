@@ -12,7 +12,7 @@ obj_cart = cart()
 obj_db_sqlit3 = database_sqlite3()
 obj_db_sqlit3.create_connection_sqlite3()
 
-bool_sqlite3 = False
+bool_sqlite3 = True
 
 
 @app.route('/')
@@ -32,7 +32,8 @@ def validate_customer():
     if request.method == "POST":
         obj_customer.UserName = request.form["username"]
         obj_customer.Password = request.form["password"]
-
+        if obj_customer.UserName == '' or obj_customer.Password == '':
+            return redirect("/loginError")
         if obj_customer.isSignUP:
             if not (str(obj_customer.UserName).replace(' ', '')):
                 raise Exception("UserName is null or empty.")
