@@ -1,4 +1,4 @@
 *.python linguist-detectable=true
-*.flask linguist-detectable=true 
-*.html linguist-detectable=true 
-*.css linguist-detectable=true
+*.flask linguist-detectable=false 
+*.html linguist-detectable=false
+*.css linguist-detectable=false
